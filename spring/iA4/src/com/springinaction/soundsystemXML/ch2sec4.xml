@@ -7,10 +7,10 @@
 	<!-- 声明一个SgtPeppers的bean，将其id设为“compactDisc” 
 	<bean id="compactDisc" class="com.springinaction.soundsystemXML.SgtPeppers" />-->
 
-    <!-- 构造器注入bean引用 -->
+    <!-- 构造器注入bean引用 
 	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
 		<constructor-arg ref="compactDisc" />
-	</bean>
+	</bean>-->
 	
 	<!-- 替代方案是用spring的c-命名空间 -->
 	<!-- 在头上加入 xmlns:c="http://www.springframework.org/schema/c"
@@ -56,5 +56,14 @@
 			</list>
 		</constructor-arg>
 	</bean>
-    
+	
+	<!-- 这样声明的话，由于没有注入compactDisc(CDPlayer的一个private成员），
+	CDPlayerTest.play()会报NPE错，但cdShouldNotBeNull是能过的 ，因为它确实声明了
+	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer"/>-->
+	
+    <!-- 用property标签，把compactDisc装配进去，CDPlayerTest.play()就能过了 -->
+	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
+		<property name="compactDisc" ref="compactDisc" />
+	</bean>
+
 </beans>
