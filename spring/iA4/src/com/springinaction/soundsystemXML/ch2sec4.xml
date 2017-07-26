@@ -32,5 +32,30 @@
 		<c:_title = Sgt. Pepper ' s Lonely Hearts Club Band " />
 		<c:_artist = The Beatles " />
 	</bean>-->
+	
+	<!-- 如果构造器参数是种集合，可以传个null进去
+	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
+		<constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
+		<constructor-arg value="The Beatles" />
+		<constructor-arg>
+			<null />
+		</constructor-arg>
+	</bean>-->
+    <!-- 不过这应该不是理想方案，因为“刻录”的时候一般是[确实]写入了若干首歌的 -->
+	
+	<!-- 所以，可以用<list>将要传入的（第三个）参数（List<String> tracks）声明为一个列表 -->
+	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
+		<constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
+		<constructor-arg value="The Beatles" />
+		<constructor-arg>
+			<list>
+				<value>Sgt. Pepper's Lonely Hearts Club Band</value>
+				<value>With a Little Help from My Friends</value>
+				<value>Lucy in the Sky with Diamonds</value>
+				<value>Getting Better</value>
+				<value>Fixing a Hole</value>
+			</list>
+		</constructor-arg>
+	</bean>
     
 </beans>
