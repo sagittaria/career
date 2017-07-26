@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
@@ -42,7 +43,7 @@
 	</bean>-->
     <!-- 不过这应该不是理想方案，因为“刻录”的时候一般是[确实]写入了若干首歌的 -->
 	
-	<!-- 所以，可以用<list>将要传入的（第三个）参数（List<String> tracks）声明为一个列表 -->
+	<!-- 所以，可以用<list>将要传入的（第三个）参数（List<String> tracks）声明为一个列表 
 	<bean id="compactDisc" class="com.springinaction.soundsystemXML.BlankDisc">
 		<constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
 		<constructor-arg value="The Beatles" />
@@ -55,15 +56,34 @@
 				<value>Sgt. Pepper's Lonely Hearts Club Band</value>
 			</list>
 		</constructor-arg>
-	</bean>
+	</bean>-->
 	
 	<!-- 这样声明的话，由于没有注入compactDisc(CDPlayer的一个private成员），
 	CDPlayerTest.play()会报NPE错，但cdShouldNotBeNull是能过的 ，因为它确实声明了
 	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer"/>-->
 	
-    <!-- 用property标签，把compactDisc装配进去，CDPlayerTest.play()就能过了 -->
+    <!-- 用property标签，把compactDisc装配进去，CDPlayerTest.play()就能过了 
 	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
 		<property name="compactDisc" ref="compactDisc" />
-	</bean>
+	</bean>-->
+	
+	<!-- 启用p-命名空间替代上面的property方案 -->
+	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer"
+	   p:compactDisc-ref="compactDisc"/>
 
+    <!-- p-命名空间与property标签混合使用 -->
+    <bean id="compactDisc" class="com.springinaction.soundsystemXML.BlankDisc"
+       p:title="Sgt. Pepper's Lonely Hearts Club Band"
+       p:artist="The Beatles">
+        <property name="tracks">
+            <list>
+                <value>With a Little Help from My Friends</value>
+                <value>Lucy in the Sky with Diamonds</value>
+                <value>Getting Better</value>
+                <value>Fixing a Hole</value>
+                <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+            </list>
+        </property>
+    </bean>
+    
 </beans>
