@@ -2,16 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context">
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- 声明一个SgtPeppers的bean，将其id设为“compactDisc” 
 	<bean id="compactDisc" class="com.springinaction.soundsystemXML.SgtPeppers" />-->
 
-    <!-- 构造器注入bean引用 
+    <!-- 构造器注入bean引用 -->
 	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
 		<constructor-arg ref="compactDisc" />
-	</bean>-->
+	</bean>
 	
 	<!-- 替代方案是用spring的c-命名空间 -->
 	<!-- 在头上加入 xmlns:c="http://www.springframework.org/schema/c"
@@ -21,20 +20,20 @@
 	 -->
 	 
     <!-- 将字面量注入到构造器中
-	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
+	<bean id="compactDisc" class="com.springinaction.soundsystemXML.BlankDisc">
 		<constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
 		<constructor-arg value="The Beatles" />
 	</bean> -->
     <!-- 以前SgtPeppers的title和artist是硬编码的，现在改成个“类似现实中的空磁盘”，可以“刻录” -->
     
     <!-- 如果用c-命名空间的话 
-	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
+	<bean id="compactDisc" class="com.springinaction.soundsystemXML.BlankDisc">
 		<c:_title = Sgt. Pepper ' s Lonely Hearts Club Band " />
 		<c:_artist = The Beatles " />
 	</bean>-->
 	
 	<!-- 如果构造器参数是种集合，可以传个null进去
-	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
+	<bean id="compactDisc" class="com.springinaction.soundsystemXML.BlankDisc">
 		<constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
 		<constructor-arg value="The Beatles" />
 		<constructor-arg>
@@ -44,16 +43,16 @@
     <!-- 不过这应该不是理想方案，因为“刻录”的时候一般是[确实]写入了若干首歌的 -->
 	
 	<!-- 所以，可以用<list>将要传入的（第三个）参数（List<String> tracks）声明为一个列表 -->
-	<bean id="cdPlayer" class="com.springinaction.soundsystemXML.CDPlayer">
+	<bean id="compactDisc" class="com.springinaction.soundsystemXML.BlankDisc">
 		<constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
 		<constructor-arg value="The Beatles" />
 		<constructor-arg>
 			<list>
-				<value>Sgt. Pepper's Lonely Hearts Club Band</value>
 				<value>With a Little Help from My Friends</value>
 				<value>Lucy in the Sky with Diamonds</value>
 				<value>Getting Better</value>
 				<value>Fixing a Hole</value>
+				<value>Sgt. Pepper's Lonely Hearts Club Band</value>
 			</list>
 		</constructor-arg>
 	</bean>
