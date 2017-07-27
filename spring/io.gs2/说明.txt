@@ -1,0 +1,3 @@
+http://spring.io/guides/gs/serving-web-content/
+
+Serving Web Content with Spring MVC: This guide walks you through the process of creating a "hello world" web site with Spring.
