@@ -24,6 +24,8 @@ public class Spitter {
     @Size(min = 2, max = 30)
     private String password;
 
+    public Spitter(){}
+    
     public Spitter(Long id, String firstName, String lastName, String username, String password) {
         this.id = id;
         this.firstName = firstName;
@@ -78,12 +80,12 @@ public class Spitter {
 
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this, "firstName", "lastName");
+        return HashCodeBuilder.reflectionHashCode(this, "firstName", "lastName", "username", "password");
     }
 
     @Override
     public boolean equals(Object that) {
-        return EqualsBuilder.reflectionEquals(this, that, "firstName", "lastName");
+        return EqualsBuilder.reflectionEquals(this, that, "firstName", "lastName", "username", "password");
     }
 
 }
