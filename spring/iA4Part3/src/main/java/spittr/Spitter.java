@@ -9,23 +9,24 @@ public class Spitter {
     private Long id;
 
     @NotNull
-    @Size(min = 5, max = 16)
-    private String firstName;
-
+    @Size(min = 5, max = 16, message = "{username.size}")
+    private String username;
+    
     @NotNull
-    @Size(min = 5, max = 25)
+    @Size(min = 5, max = 25, message = "{password.size}")
+    private String password;
+    
+    @NotNull
+    @Size(min = 2, max = 30, message = "{firstName.size}")
+    private String firstName;
+    
+    @NotNull
+    @Size(min = 2, max = 30, message = "{lastName.size}")
     private String lastName;
 
-    @NotNull
-    @Size(min = 2, max = 30)
-    private String username;
+    public Spitter() {
+    }
 
-    @NotNull
-    @Size(min = 2, max = 30)
-    private String password;
-
-    public Spitter(){}
-    
     public Spitter(Long id, String firstName, String lastName, String username, String password) {
         this.id = id;
         this.firstName = firstName;
@@ -73,9 +74,9 @@ public class Spitter {
     public Long getId() {
         return id;
     }
-    
-    public void setId(Long id){
-        this.id=id;
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
